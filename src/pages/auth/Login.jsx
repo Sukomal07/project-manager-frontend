@@ -64,7 +64,7 @@ function Login() {
                     email: '',
                     password: ''
                 })
-                navigate('/dashboard')
+                navigate('/board')
             }
         } else {
             setErrors(newErrors);
