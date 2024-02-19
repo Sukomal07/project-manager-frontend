@@ -1,0 +1,64 @@
+.analytics-container {
+  padding: 20px;
+}
+
+.analytics-sections {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-status-section,
+.task-priority-section {
+  width: 45%;
+}
+
+.task-status-section ul,
+.task-priority-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.task-status-section li,
+.task-priority-section li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.backlog-dot {
+  background-color: #f39c12;
+}
+.todo-dot {
+  background-color: #3498db;
+}
+.inprogress-dot {
+  background-color: #9b59b6;
+}
+.completed-dot {
+  background-color: #2ecc71;
+}
+
+.low-dot {
+  background-color: #95a5a6;
+}
+.moderate-dot {
+  background-color: #f1c40f;
+}
+.high-dot {
+  background-color: #e74c3c;
+}
+.duedate-dot {
+  background-color: #7f8c8d;
+}
+
+.task-count {
+  margin-left: auto;
+}

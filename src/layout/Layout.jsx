@@ -24,9 +24,9 @@ function Layout({ children }) {
                 </div>
                 <nav className="sidebar-nav">
                     <ul>
-                        <li><NavLink to="/board" activeClassName="active"><FiLayout /> Board</NavLink></li>
-                        <li><NavLink to="/analytics" activeClassName="active"><GoDatabase /> Analytics</NavLink></li>
-                        <li><NavLink to="/settings" activeClassName="active"><FiSettings /> Settings</NavLink></li>
+                        <li><NavLink to="/board" ><FiLayout /> Board</NavLink></li>
+                        <li><NavLink to="/analytics"><GoDatabase /> Analytics</NavLink></li>
+                        <li><NavLink to="/settings" ><FiSettings /> Settings</NavLink></li>
                     </ul>
                 </nav>
                 <div className="sidebar-footer">
