@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import toast from 'react-hot-toast'
 
 import axiosInstance from '../../helper/AxiosInstance'
 
@@ -19,7 +18,7 @@ export const getBacklogTask = createAsyncThunk("task/backlog", async () => {
         const response = await axiosInstance.get("/task/status/backlog")
         return response.data
     } catch (error) {
-        console.log(error);
+        console.error(error.message)
     }
 })
 
@@ -28,7 +27,7 @@ export const getTodoTask = createAsyncThunk("task/todo", async () => {
         const response = await axiosInstance.get("/task/status/todo")
         return response.data
     } catch (error) {
-        console.log(error);
+        console.error(error.message)
     }
 })
 
@@ -37,7 +36,7 @@ export const getProgressTask = createAsyncThunk("task/progress", async () => {
         const response = await axiosInstance.get("/task/status/progress")
         return response.data
     } catch (error) {
-        console.log(error);
+        console.error(error.message)
     }
 })
 
@@ -46,7 +45,7 @@ export const getDoneTask = createAsyncThunk("task/done", async () => {
         const response = await axiosInstance.get("/task/status/done")
         return response.data
     } catch (error) {
-        console.log(error);
+        console.error(error.message)
     }
 })
 
@@ -55,7 +54,7 @@ export const getHighPriority = createAsyncThunk("task/priority/high", async () =
         const response = await axiosInstance.get("/task/priority/high")
         return response.data
     } catch (error) {
-        console.log(error);
+        console.error(error.message)
     }
 })
 
@@ -64,7 +63,7 @@ export const getLowPriority = createAsyncThunk("task/priority/low", async () => 
         const response = await axiosInstance.get("/task/priority/low")
         return response.data
     } catch (error) {
-        console.log(error);
+        console.error(error.message)
     }
 })
 
@@ -73,7 +72,7 @@ export const getModeratePriority = createAsyncThunk("task/priority/moderate", as
         const response = await axiosInstance.get("/task/priority/moderate")
         return response.data
     } catch (error) {
-        console.log(error);
+        console.error(error.message)
     }
 })
 
@@ -82,14 +81,18 @@ export const getDueTask = createAsyncThunk("task/due", async () => {
         const response = await axiosInstance.get("/task/all/dueTasks")
         return response.data
     } catch (error) {
-        console.log(error);
+        console.error(error.message)
     }
 })
 
 const analyticsSlice = createSlice({
     name: 'analytics',
     initialState,
-    reducers: {},
+    reducers: {
+        resetAnalytics: () => {
+            return initialState
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getBacklogTask.fulfilled, (state, action) => {
