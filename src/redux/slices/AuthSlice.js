@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 import axiosInstance from '../../helper/AxiosInstance'
 
 const initialState = {
-    isLoggedIn: localStorage.getItem("isLoggedIn") || false,
+    isLoggedIn: false,
     data: {}
 }
 
@@ -68,17 +68,8 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 export const getProfile = createAsyncThunk("auth/profile", async () => {
     toast.dismiss()
     try {
-        const res = axiosInstance.get("/user/profile");
-        toast.promise(res, {
-            loading: "Loading...",
-            success: (data) => {
-                return data?.data?.message;
-            },
-            error: (error) => {
-                return error?.response?.data?.message
-            },
-        });
-        return (await res).data
+        const res = await axiosInstance.get("/user/profile");
+        return res.data
     } catch (error) {
         console.error(error.message)
     }
@@ -111,12 +102,10 @@ const authSlice = createSlice({
         builder.addCase(login.fulfilled, (state, action) => {
             state.data = action?.payload?.data
             if (action?.payload?.data) {
-                localStorage.setItem("isLoggedIn", true);
                 state.isLoggedIn = true
             }
         })
         builder.addCase(logout.fulfilled, (state) => {
-            localStorage.clear();
             state.data = {};
             state.isLoggedIn = false
         })
