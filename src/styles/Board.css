@@ -1,0 +1,30 @@
+.board-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.board-container header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.board-container header h1 {
+  font-size: 20px;
+}
+.board-container header span {
+  color: #707070;
+}
+
+.sub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.boards {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
