@@ -1,64 +1,42 @@
-.analytics-container {
-  padding: 20px;
-}
-
 .analytics-sections {
   display: flex;
-  justify-content: space-between;
+  gap: 30px;
+  padding: 70px 30px;
 }
-
 .task-status-section,
 .task-priority-section {
-  width: 45%;
+  width: 350px;
+  background-color: #4391ed1c;
+  padding: 30px;
+  border-radius: 10px;
 }
-
 .task-status-section ul,
 .task-priority-section ul {
-  list-style: none;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
 }
-
-.task-status-section li,
-.task-priority-section li {
-  margin-bottom: 10px;
+.task-status-section ul li,
+.task-priority-section ul li {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+.task-count {
+  font-size: 20px;
+  font-weight: 550;
+}
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .dot {
-  height: 15px;
-  width: 15px;
+  width: 10px;
+  height: 10px;
+  display: flex;
+  background-color: #90c4cc;
   border-radius: 50%;
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.backlog-dot {
-  background-color: #f39c12;
-}
-.todo-dot {
-  background-color: #3498db;
-}
-.inprogress-dot {
-  background-color: #9b59b6;
-}
-.completed-dot {
-  background-color: #2ecc71;
-}
-
-.low-dot {
-  background-color: #95a5a6;
-}
-.moderate-dot {
-  background-color: #f1c40f;
-}
-.high-dot {
-  background-color: #e74c3c;
-}
-.duedate-dot {
-  background-color: #7f8c8d;
-}
-
-.task-count {
-  margin-left: auto;
 }
