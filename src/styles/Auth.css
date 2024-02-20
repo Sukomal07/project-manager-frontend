@@ -45,7 +45,7 @@
   width: 40vw;
 }
 
-form {
+.form-section form {
   height: 100vh;
   padding: 6rem 5rem;
   display: flex;
@@ -53,7 +53,7 @@ form {
   justify-content: space-evenly;
 }
 
-form > h2 {
+.form-section form > h2 {
   text-align: center;
   color: #343434;
 }
@@ -64,13 +64,13 @@ form > h2 {
   gap: 20px;
 }
 
-.input-container {
+.form-section .input-container {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.form-input {
+.form-section .input-container .form-input {
   border: 1px solid #828282;
   display: flex;
   align-items: center;
@@ -81,7 +81,7 @@ form > h2 {
   border-radius: 7px;
   font-size: 20px;
 }
-form input {
+.form-section form input {
   width: 100%;
   border: none;
   outline: none;
@@ -95,7 +95,7 @@ form input {
   gap: 25px;
 }
 
-form button {
+.form-section form button {
   border: none;
   background-color: #17a2b8;
   color: white;
@@ -105,13 +105,13 @@ form button {
   transition: 0.3s ease-in-out 2ms;
 }
 
-form button:hover {
+.form-section form button:hover {
   background-color: white;
   color: #17a2b8;
   border: 1px solid #17a2b8;
 }
 
-form p {
+.form-section form p {
   text-align: center;
   color: #828282;
 }
