@@ -66,7 +66,6 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 })
 
 export const getProfile = createAsyncThunk("auth/profile", async () => {
-    toast.dismiss()
     try {
         const res = await axiosInstance.get("/user/profile");
         return res.data
@@ -110,9 +109,6 @@ const authSlice = createSlice({
             state.isLoggedIn = false
         })
         builder.addCase(getProfile.fulfilled, (state, action) => {
-            state.data = action?.payload?.data
-        })
-        builder.addCase(updateProfile.fulfilled, (state, action) => {
             state.data = action?.payload?.data
         })
     }
