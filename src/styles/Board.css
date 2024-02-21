@@ -22,9 +22,153 @@
   justify-content: space-between;
   align-items: center;
 }
+.timeframe-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+}
 
 .boards {
+  flex-grow: 1;
+  display: flex;
+  gap: 25px;
+  overflow-x: auto;
+}
+.board {
+  flex-shrink: 0;
+  background-color: #eef2f5;
+  width: 400px;
+  height: calc(100% - 30px);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 15px;
+  overflow: hidden;
+}
+.board-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.board-name svg {
+  cursor: pointer;
+}
+.add-task {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.timeframe {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  background-color: white;
+  border-radius: 7px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 100;
+  width: 170px;
+  top: 40px;
+  right: 27px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown span {
+  padding: 7px 15px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.dropdown span:hover {
+  background-color: #f6f6f6;
+}
+
+.all-task {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+.task {
+  background-color: white;
+  padding: 20px;
+  border-radius: 7px;
+  height: max-content;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.task-priority span {
+  font-size: 13px;
+  font-weight: 600;
+}
+.task-priority svg {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.task h1 {
+  font-size: 18px;
+  font-weight: 600;
+}
+.checklist-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.checklist-header span {
+  font-weight: 600;
+}
+.checklist-header div {
+  background-color: #eeecec;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+.all-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.checklist {
+  border: 1px solid #e2e2e2;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 7px;
+}
+.checklist input {
+  height: 16px;
+  width: 16px;
+}
+
+.task-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.task-footer span {
+  font-size: 11px;
+  font-weight: 600;
+  background-color: #eeecec;
+  padding: 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  color: #767575;
+}
+.other-boards {
+  display: flex;
+  gap: 10px;
 }
