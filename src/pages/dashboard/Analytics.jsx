@@ -51,7 +51,7 @@ function Analytics() {
                                             <span>Backlog Tasks</span>
                                         </div>
                                         <span className="task-count">
-                                            {formatTaskCount(backlog.totalTask)}
+                                            {formatTaskCount(backlog)}
                                         </span>
                                     </li>
                                     <li>
@@ -60,7 +60,7 @@ function Analytics() {
                                             <span>To-do Tasks</span>
                                         </div>
                                         <span className="task-count">
-                                            {formatTaskCount(todo.totalTask)}
+                                            {formatTaskCount(todo)}
                                         </span>
                                     </li>
                                     <li>
@@ -69,7 +69,7 @@ function Analytics() {
                                             <span>In-Progress Tasks</span>
                                         </div>
                                         <span className="task-count">
-                                            {formatTaskCount(progress.totalTask)}
+                                            {formatTaskCount(progress)}
                                         </span>
                                     </li>
                                     <li>
@@ -78,7 +78,7 @@ function Analytics() {
                                             <span>Completed Tasks</span>
                                         </div>
                                         <span className="task-count">
-                                            {formatTaskCount(done.totalTask)}
+                                            {formatTaskCount(done)}
                                         </span>
                                     </li>
                                 </ul>

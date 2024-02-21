@@ -3,10 +3,10 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axiosInstance from '../../helper/AxiosInstance'
 
 const initialState = {
-    backlog: {},
-    todo: {},
-    progress: {},
-    done: {},
+    backlog: 0,
+    todo: 0,
+    progress: 0,
+    done: 0,
     low: 0,
     high: 0,
     moderate: 0,
@@ -15,7 +15,7 @@ const initialState = {
 
 export const getBacklogTask = createAsyncThunk("task/backlog", async () => {
     try {
-        const response = await axiosInstance.get("/task/status/backlog")
+        const response = await axiosInstance.get("/task/status?status=backlog")
         return response.data
     } catch (error) {
         console.error(error.message)
@@ -24,7 +24,7 @@ export const getBacklogTask = createAsyncThunk("task/backlog", async () => {
 
 export const getTodoTask = createAsyncThunk("task/todo", async () => {
     try {
-        const response = await axiosInstance.get("/task/status/todo")
+        const response = await axiosInstance.get("/task/status?status=todo")
         return response.data
     } catch (error) {
         console.error(error.message)
@@ -33,7 +33,7 @@ export const getTodoTask = createAsyncThunk("task/todo", async () => {
 
 export const getProgressTask = createAsyncThunk("task/progress", async () => {
     try {
-        const response = await axiosInstance.get("/task/status/progress")
+        const response = await axiosInstance.get("/task/status?status=progress")
         return response.data
     } catch (error) {
         console.error(error.message)
@@ -42,7 +42,7 @@ export const getProgressTask = createAsyncThunk("task/progress", async () => {
 
 export const getDoneTask = createAsyncThunk("task/done", async () => {
     try {
-        const response = await axiosInstance.get("/task/status/done")
+        const response = await axiosInstance.get("/task/status?status=done")
         return response.data
     } catch (error) {
         console.error(error.message)
@@ -51,7 +51,7 @@ export const getDoneTask = createAsyncThunk("task/done", async () => {
 
 export const getHighPriority = createAsyncThunk("task/priority/high", async () => {
     try {
-        const response = await axiosInstance.get("/task/priority/high")
+        const response = await axiosInstance.get("/task/priority?priority=high")
         return response.data
     } catch (error) {
         console.error(error.message)
@@ -60,7 +60,7 @@ export const getHighPriority = createAsyncThunk("task/priority/high", async () =
 
 export const getLowPriority = createAsyncThunk("task/priority/low", async () => {
     try {
-        const response = await axiosInstance.get("/task/priority/low")
+        const response = await axiosInstance.get("/task/priority?priority=low")
         return response.data
     } catch (error) {
         console.error(error.message)
@@ -69,7 +69,7 @@ export const getLowPriority = createAsyncThunk("task/priority/low", async () => 
 
 export const getModeratePriority = createAsyncThunk("task/priority/moderate", async () => {
     try {
-        const response = await axiosInstance.get("/task/priority/moderate")
+        const response = await axiosInstance.get("/task/priority?priority=moderate")
         return response.data
     } catch (error) {
         console.error(error.message)
@@ -96,16 +96,16 @@ const analyticsSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getBacklogTask.fulfilled, (state, action) => {
-                state.backlog = action.payload?.data;
+                state.backlog = action.payload?.data?.totalTask;
             })
             .addCase(getTodoTask.fulfilled, (state, action) => {
-                state.todo = action.payload?.data;
+                state.todo = action.payload?.data?.totalTask;
             })
             .addCase(getProgressTask.fulfilled, (state, action) => {
-                state.progress = action.payload?.data;
+                state.progress = action.payload?.data?.totalTask;
             })
             .addCase(getDoneTask.fulfilled, (state, action) => {
-                state.done = action.payload?.data;
+                state.done = action.payload?.data?.totalTask;
             })
             .addCase(getHighPriority.fulfilled, (state, action) => {
                 state.high = action.payload.data?.totalTask;
