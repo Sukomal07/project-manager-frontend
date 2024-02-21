@@ -96,28 +96,28 @@ const analyticsSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getBacklogTask.fulfilled, (state, action) => {
-                state.backlog = action.payload.data;
+                state.backlog = action.payload?.data;
             })
             .addCase(getTodoTask.fulfilled, (state, action) => {
-                state.todo = action.payload.data;
+                state.todo = action.payload?.data;
             })
             .addCase(getProgressTask.fulfilled, (state, action) => {
-                state.progress = action.payload.data;
+                state.progress = action.payload?.data;
             })
             .addCase(getDoneTask.fulfilled, (state, action) => {
-                state.done = action.payload.data;
+                state.done = action.payload?.data;
             })
             .addCase(getHighPriority.fulfilled, (state, action) => {
-                state.high = action.payload.data.totalTask;
+                state.high = action.payload.data?.totalTask;
             })
             .addCase(getLowPriority.fulfilled, (state, action) => {
-                state.low = action.payload.data.totalTask;
+                state.low = action.payload.data?.totalTask;
             })
             .addCase(getModeratePriority.fulfilled, (state, action) => {
-                state.moderate = action.payload.data.totalTask;
+                state.moderate = action.payload.data?.totalTask;
             })
             .addCase(getDueTask.fulfilled, (state, action) => {
-                state.dueTask = action.payload.data.overdueTasks;
+                state.dueTask = action.payload.data?.overdueTasks;
             })
     }
 })
