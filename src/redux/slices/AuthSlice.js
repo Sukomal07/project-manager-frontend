@@ -4,8 +4,8 @@ import toast from 'react-hot-toast'
 import axiosInstance from '../../helper/AxiosInstance'
 
 const initialState = {
-    isLoggedIn: false,
-    data: {}
+    isLoggedIn: localStorage.getItem('isLoggedIn') || false,
+    data: JSON.parse(localStorage.getItem('userData')) || {}
 }
 
 export const createAccount = createAsyncThunk("auth/signup", async (data) => {
@@ -102,14 +102,19 @@ const authSlice = createSlice({
             state.data = action?.payload?.data
             if (action?.payload?.data) {
                 state.isLoggedIn = true
+                localStorage.setItem('isLoggedIn', state.isLoggedIn);
+                localStorage.setItem('userData', JSON.stringify(state.data));
             }
         })
         builder.addCase(logout.fulfilled, (state) => {
             state.data = {};
             state.isLoggedIn = false
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userData');
         })
         builder.addCase(getProfile.fulfilled, (state, action) => {
             state.data = action?.payload?.data
+            localStorage.setItem('userData', JSON.stringify(state.data));
         })
     }
 })
