@@ -13,7 +13,7 @@
 .board-container header h1 {
   font-size: 20px;
 }
-.board-container header span {
+.today-date {
   color: #707070;
 }
 
@@ -64,13 +64,12 @@
   position: relative;
 }
 
-.dropdown {
+.timeframe-dropdown {
   position: absolute;
   background-color: white;
   border-radius: 7px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   padding: 10px;
-  z-index: 100;
   width: 170px;
   top: 40px;
   right: 27px;
@@ -78,14 +77,14 @@
   flex-direction: column;
 }
 
-.dropdown span {
+.timeframe-dropdown span {
   padding: 7px 15px;
   cursor: pointer;
   border-radius: 6px;
   font-weight: 600;
 }
 
-.dropdown span:hover {
+.timeframe-dropdown span:hover {
   background-color: #f6f6f6;
 }
 
@@ -112,7 +111,35 @@
   cursor: pointer;
   font-size: 20px;
 }
-
+.priority {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.priority span {
+  color: #707070;
+}
+.high {
+  display: flex;
+  width: 10px;
+  height: 10px;
+  background-color: #ff2473;
+  border-radius: 50%;
+}
+.moderate {
+  display: flex;
+  width: 10px;
+  height: 10px;
+  background-color: #18b0ff;
+  border-radius: 50%;
+}
+.low {
+  display: flex;
+  width: 10px;
+  height: 10px;
+  background-color: #63c05b;
+  border-radius: 50%;
+}
 .task h1 {
   font-size: 18px;
   font-weight: 600;
@@ -152,6 +179,8 @@
 .checklist input {
   height: 16px;
   width: 16px;
+  cursor: pointer;
+  accent-color: #17a2b8;
 }
 
 .task-footer {
@@ -171,4 +200,36 @@
 .other-boards {
   display: flex;
   gap: 10px;
+}
+
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  background-color: white;
+  border-radius: 7px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  width: 170px;
+  top: 0px;
+  right: 27px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown span {
+  padding: 7px 15px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+  color: black;
+}
+.dropdown span:nth-child(3) {
+  color: red;
+}
+
+.dropdown span:hover {
+  background-color: #f6f6f6;
 }
