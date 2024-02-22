@@ -1,20 +1,33 @@
 import '../styles/Layout.css';
 
+import { useState } from 'react';
 import { FiLayout, FiSettings } from 'react-icons/fi';
 import { GoDatabase } from "react-icons/go";
 import { IoLogOutOutline } from 'react-icons/io5';
-import { useDispatch } from 'react-redux'
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import siteLogo from '../assets/sitelogo.png'
-import { logout } from '../redux/slices/AuthSlice'
-function Layout({ children }) {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const handleLogout = async () => {
-        await dispatch(logout());
-        navigate('/login')
-    };
+import DeleteModel from '../components/DeleteModel';
+import LogoutModel from '../components/LogoutModel';
+
+function Layout({ children, taskId, display, setDeleteModelInfo, setRefresh }) {
+    const [logoutDisplay, setLogoutDisplay] = useState("none")
+
+    const hideDeleteModel = () => {
+        setDeleteModelInfo(prevInfo => ({
+            ...prevInfo,
+            display: 'none'
+        }));
+    }
+
+    const onLogout = () => {
+        setLogoutDisplay("flex")
+    }
+
+    const cancelLogout = () => {
+        setLogoutDisplay("none")
+    }
+
     return (
         <div className="layout">
             <aside className="sidebar">
@@ -30,12 +43,14 @@ function Layout({ children }) {
                     </ul>
                 </nav>
                 <div className="sidebar-footer">
-                    <button onClick={handleLogout}><IoLogOutOutline /> Log out</button>
+                    <button onClick={onLogout}><IoLogOutOutline /> Log out</button>
                 </div>
             </aside>
             <main className="main-content">
                 {children}
             </main>
+            <DeleteModel display={display} taskId={taskId} onCancel={hideDeleteModel} setRefresh={setRefresh} />
+            <LogoutModel logoutDisplay={logoutDisplay} cancelLogout={cancelLogout} />
         </div>
     );
 }

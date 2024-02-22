@@ -1,6 +1,7 @@
 .layout {
   display: flex;
   height: 100vh;
+  position: relative;
 }
 
 .sidebar {
@@ -74,6 +75,91 @@
   width: calc(100vw - 250px);
 }
 
+.delete-model {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: #303d4375;
+}
+.model {
+  height: 200px;
+  width: 350px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 24px;
+  border-radius: 10px;
+}
+.model p {
+  font-weight: 600;
+}
+.delete-buttons {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.delete-buttons button {
+  height: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 13px;
+  cursor: pointer;
+}
+.delete-button {
+  border: none;
+  background-color: #17a2b8;
+  color: #fffffff0;
+}
+.cancel {
+  background-color: transparent;
+  border: 1px solid #cf3636;
+  color: #cf3636;
+}
+
+.logout-model {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: #303d4375;
+}
+.logout-container {
+  height: 200px;
+  width: 350px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 24px;
+  border-radius: 10px;
+}
+.logout-container p {
+  font-weight: 600;
+}
+.logout-buttons {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.logout-buttons button {
+  height: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 13px;
+  cursor: pointer;
+}
 .loader {
   margin: auto;
   border: 5px solid white;
