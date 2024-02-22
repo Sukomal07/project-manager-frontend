@@ -24,6 +24,24 @@ export const markChecklist = createAsyncThunk("task/toggle", async (data) => {
     }
 })
 
+export const changeTaskStatus = createAsyncThunk("task/change-status", async (data) => {
+    try {
+        const response = await axiosInstance.patch(`/task/change-status/${data?.taskId}`, data)
+        return response.data
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
+export const deleteTask = createAsyncThunk("task/delete-task", async (data) => {
+    try {
+        const response = await axiosInstance.delete(`/task/deleteTask/${data}`)
+        return response.data
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
 
 const taskSlice = createSlice({
     name: 'task',
