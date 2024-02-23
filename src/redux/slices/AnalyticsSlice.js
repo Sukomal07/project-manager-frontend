@@ -108,16 +108,16 @@ const analyticsSlice = createSlice({
                 state.done = action.payload?.data?.totalTask;
             })
             .addCase(getHighPriority.fulfilled, (state, action) => {
-                state.high = action.payload.data?.totalTask;
+                state.high = action.payload?.data?.totalTask;
             })
             .addCase(getLowPriority.fulfilled, (state, action) => {
-                state.low = action.payload.data?.totalTask;
+                state.low = action.payload?.data?.totalTask;
             })
             .addCase(getModeratePriority.fulfilled, (state, action) => {
-                state.moderate = action.payload.data?.totalTask;
+                state.moderate = action.payload?.data?.totalTask;
             })
             .addCase(getDueTask.fulfilled, (state, action) => {
-                state.dueTask = action.payload.data?.overdueTasks;
+                state.dueTask = action.payload?.data?.overdueTasks;
             })
     }
 })
