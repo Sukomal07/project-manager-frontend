@@ -7,10 +7,11 @@ import { IoLogOutOutline } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
 
 import siteLogo from '../assets/sitelogo.png'
+import CreateTask from '../components/CreateTask';
 import DeleteModel from '../components/DeleteModel';
 import LogoutModel from '../components/LogoutModel';
 
-function Layout({ children, taskId, display, setDeleteModelInfo, setRefresh }) {
+function Layout({ children, taskId, display, setDeleteModelInfo, setRefresh, setCreateTaskModel, visibility }) {
     const [logoutDisplay, setLogoutDisplay] = useState("none")
 
     const hideDeleteModel = () => {
@@ -26,6 +27,10 @@ function Layout({ children, taskId, display, setDeleteModelInfo, setRefresh }) {
 
     const cancelLogout = () => {
         setLogoutDisplay("none")
+    }
+
+    const cancelCreateTask = () => {
+        setCreateTaskModel("none")
     }
 
     return (
@@ -51,6 +56,7 @@ function Layout({ children, taskId, display, setDeleteModelInfo, setRefresh }) {
             </main>
             <DeleteModel display={display} taskId={taskId} onCancel={hideDeleteModel} setRefresh={setRefresh} />
             <LogoutModel logoutDisplay={logoutDisplay} cancelLogout={cancelLogout} />
+            <CreateTask visibility={visibility} cancelCreateTask={cancelCreateTask} setRefresh={setRefresh} />
         </div>
     );
 }

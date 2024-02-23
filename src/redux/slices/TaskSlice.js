@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import toast from 'react-hot-toast'
 
 import axiosInstance from '../../helper/AxiosInstance'
-
 const initialState = {
     tasks: []
 }
@@ -37,6 +37,25 @@ export const deleteTask = createAsyncThunk("task/delete-task", async (data) => {
     try {
         const response = await axiosInstance.delete(`/task/deleteTask/${data}`)
         return response.data
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
+export const createTask = createAsyncThunk("task/create-task", async (data) => {
+    try {
+        const res = axiosInstance.post("/task/newTask", data);
+        toast.dismiss()
+        toast.promise(res, {
+            loading: "Wait! Creating task...",
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: (error) => {
+                return error?.response?.data?.message
+            },
+        });
+        return (await res).data
     } catch (error) {
         console.error(error.message)
     }

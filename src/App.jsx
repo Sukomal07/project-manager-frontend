@@ -9,7 +9,9 @@ import UnprotectedRoute from './pages/auth/UnprotectedRoute';
 import Analytics from './pages/dashboard/Analytics'
 import Board from './pages/dashboard/Board'
 import Settings from './pages/dashboard/Settings'
+
 function App() {
+
   return (
     <>
       <Routes>

@@ -33,6 +33,11 @@ function Board() {
         display: 'none',
         taskId: ''
     })
+    const [createTaskModel, setCreateTaskModel] = useState("none")
+
+    const handleClickPlus = () => {
+        setCreateTaskModel("flex")
+    }
 
     const handleDeleteClick = (taskId) => {
         setDeleteModelInfo({
@@ -236,7 +241,7 @@ function Board() {
     }, [taskStatus, dispatch])
 
     return (
-        <Layout taskId={deleteModelInfo.taskId} display={deleteModelInfo.display} setDeleteModelInfo={setDeleteModelInfo} setRefresh={setRefresh}>
+        <Layout taskId={deleteModelInfo.taskId} display={deleteModelInfo.display} setDeleteModelInfo={setDeleteModelInfo} setRefresh={setRefresh} visibility={createTaskModel} setCreateTaskModel={setCreateTaskModel}>
             <div className="board-container">
                 <header>
                     <h1>Welcome! {name}</h1>
@@ -264,7 +269,7 @@ function Board() {
                                 {
                                     status === 'todo' ? (
                                         <div className="add-task">
-                                            <VscAdd />
+                                            <VscAdd onClick={handleClickPlus} />
                                             <VscCollapseAll onClick={() => collapseAllChecklists(status)} />
                                         </div>
                                     ) : <VscCollapseAll onClick={() => collapseAllChecklists(status)} />
@@ -317,8 +322,8 @@ function Board() {
                                             </div>
                                         )}
                                         <div className='task-footer'>
-                                            <span style={getDueDateStyles(task?.status, task?.dueDate)}>
-                                                {formattedDate(task?.dueDate)}
+                                            <span style={task?.dueDate ? getDueDateStyles(task?.status, task?.dueDate) : { backgroundColor: 'transparent' }}>
+                                                {task?.dueDate ? formattedDate(task?.dueDate) : ""}
                                             </span>
                                             <div className="other-boards">
                                                 {getOtherBoards(status).map((otherStatus) => (
