@@ -1,5 +1,6 @@
 import '../../styles/Auth.css'
 
+import Cookies from 'js-cookie';
 import { useState } from 'react';
 import { CiLock } from "react-icons/ci";
 import { FaRegEnvelope } from "react-icons/fa";
@@ -12,6 +13,7 @@ import { login } from '../../redux/slices/AuthSlice';
 function Login() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const token = import.meta.env.VITE_ACCESS_TOKEN
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -64,7 +66,8 @@ function Login() {
                     email: '',
                     password: ''
                 })
-                navigate('/')
+                navigate('/board')
+                Cookies.set('authToken', token, { expires: 7 });
             }
         } else {
             setErrors(newErrors);
@@ -126,7 +129,7 @@ function Login() {
                     <div className='form-buttons'>
                         <button type="submit">Log in</button>
                         <p>Have no account yet ?</p>
-                        <Link to={'/signup'} className='login'>Register</Link>
+                        <Link to={'/'} className='login'>Register</Link>
                     </div>
                 </form>
             </div>

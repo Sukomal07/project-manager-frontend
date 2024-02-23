@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,6 +10,7 @@ function LogoutModel({ logoutDisplay, cancelLogout }) {
     const handleLogout = async () => {
         await dispatch(logout());
         navigate('/login')
+        Cookies.remove('authToken')
     }
 
     return (

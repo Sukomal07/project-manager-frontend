@@ -37,7 +37,7 @@ function Layout({ children, taskId, display, setDeleteModelInfo, setRefresh }) {
                 </div>
                 <nav className="sidebar-nav">
                     <ul>
-                        <li><NavLink to="/" ><FiLayout /> Board</NavLink></li>
+                        <li><NavLink to="/board" ><FiLayout /> Board</NavLink></li>
                         <li><NavLink to="/analytics"><GoDatabase /> Analytics</NavLink></li>
                         <li><NavLink to="/settings" ><FiSettings /> Settings</NavLink></li>
                     </ul>
