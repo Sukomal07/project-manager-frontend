@@ -9,6 +9,7 @@ import UnprotectedRoute from './pages/auth/UnprotectedRoute';
 import Analytics from './pages/dashboard/Analytics'
 import Board from './pages/dashboard/Board'
 import Settings from './pages/dashboard/Settings'
+import ViewTask from './pages/dashboard/ViewTask';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='/analytics' element={<Analytics />} />
           <Route path='/settings' element={<Settings />} />
         </Route>
+        <Route path='/task/:taskId' element={<ViewTask />} />
       </Routes>
     </>
   )

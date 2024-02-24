@@ -79,6 +79,14 @@ export const editTask = createAsyncThunk("task/edit-task", async (data) => {
         console.error(error.message)
     }
 })
+export const getTask = createAsyncThunk("task/get-ask", async (id) => {
+    try {
+        const response = await axiosInstance.get(`/task/${id}`)
+        return response.data
+    } catch (error) {
+        console.error(error.message)
+    }
+})
 
 
 const taskSlice = createSlice({
