@@ -61,6 +61,25 @@ export const createTask = createAsyncThunk("task/create-task", async (data) => {
     }
 })
 
+export const editTask = createAsyncThunk("task/edit-task", async (data) => {
+    try {
+        const res = axiosInstance.patch(`/task/editTask/${data?.id}`, data);
+        toast.dismiss()
+        toast.promise(res, {
+            loading: "Wait! Editing task...",
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: (error) => {
+                return error?.response?.data?.message
+            },
+        });
+        return (await res).data
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
 
 const taskSlice = createSlice({
     name: 'task',
