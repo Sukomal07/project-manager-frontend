@@ -4,7 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
-import toast from 'react-hot-toast'
 import { FaPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useDispatch } from 'react-redux'
@@ -79,31 +78,18 @@ function CreateTask({ visibility, cancelCreateTask, setRefresh }) {
         (item) => item.isCompleted
     ).length;
 
-    const validateTask = () => {
-
-        for (let i = 0; i < checklists.length; i++) {
-            const checklist = checklists[i].name;
-            if (!checklist.trim()) {
-                toast.error(`Checklist ${i + 1} text is required.`);
-                return false;
-            }
-        }
-        return true;
-    }
 
     const handlesave = async () => {
-        if (validateTask()) {
-            const task = {
-                title,
-                priority,
-                checklists,
-                dueDate: dueDate ? formatDate(dueDate) : ""
-            }
-            const response = await dispatch(createTask(task))
-            if (response.payload?.success) {
-                setRefresh(true)
-                cancelCreateTask()
-            }
+        const task = {
+            title,
+            priority,
+            checklists,
+            dueDate: dueDate ? formatDate(dueDate) : ""
+        }
+        const response = await dispatch(createTask(task))
+        if (response.payload?.success) {
+            setRefresh(true)
+            cancelCreateTask()
         }
     }
 
