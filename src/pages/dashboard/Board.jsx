@@ -296,7 +296,7 @@ function Board() {
                                                 }
                                             </div>
                                         </header>
-                                        <h1>{task?.title}</h1>
+                                        <h1 className="task-title" title={task?.title}>{task?.title}</h1>
                                         <div className="checklist-header">
                                             <span>Checklist{" "} ({countCompletedChecklists(task?.checklists)}/{task?.checklists?.length})</span>
                                             <div>
