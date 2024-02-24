@@ -98,13 +98,13 @@ function Settings() {
                                 type="text"
                                 name="name"
                                 id='name'
-                                value={formData.name}
+                                value={formData?.name}
                                 onChange={handleChange}
                                 placeholder="Name"
                                 autoComplete="off"
                             />
                         </div>
-                        <span className='error'>{errors.name}</span>
+                        <span className='error'>{errors?.name}</span>
                     </div>
                     <div className="input-container">
                         <div className="form-input">
@@ -113,7 +113,7 @@ function Settings() {
                                 type={isOldPasswordVisible ? "text" : "Password"}
                                 name="oldPassword"
                                 id='oldPassword'
-                                value={formData.oldPassword}
+                                value={formData?.oldPassword}
                                 onChange={handleChange}
                                 placeholder="Old Password"
                                 autoComplete="off"
@@ -124,7 +124,7 @@ function Settings() {
                                 <FiEyeOff color='#828282' onClick={togglePasswordVisibility} cursor='pointer' />
                             )}
                         </div>
-                        <span className="error">{errors.oldPassword}</span>
+                        <span className="error">{errors?.oldPassword}</span>
                     </div>
                     <div className="input-container">
                         <div className="form-input">
@@ -133,7 +133,7 @@ function Settings() {
                                 type={isNewPasswordVisible ? "text" : "Password"}
                                 name="newPassword"
                                 id='newPassword'
-                                value={formData.newPassword}
+                                value={formData?.newPassword}
                                 onChange={handleChange}
                                 placeholder="New Password"
                                 autoComplete="off"
@@ -144,7 +144,7 @@ function Settings() {
                                 <FiEyeOff color='#828282' onClick={toggleConfirmPasswordVisibility} cursor='pointer' />
                             )}
                         </div>
-                        <span className="error">{errors.newPassword}</span>
+                        <span className="error">{errors?.newPassword}</span>
                     </div>
                     <button type="submit">Update</button>
                 </form>

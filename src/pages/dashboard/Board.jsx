@@ -165,22 +165,22 @@ function Board() {
     };
 
     const filterTasksByStatus = (status) =>
-        tasks.filter((task) => task.status === status);
+        tasks.filter((task) => task?.status === status);
     const getOtherBoards = (currentStatus) => {
         const allStatuses = ["backlog", "todo", "progress", "done"];
         return allStatuses.filter((status) => status !== currentStatus);
     };
     const countCompletedChecklists = (checklists) => {
-        return checklists.filter((checklist) => checklist.isCompleted).length;
+        return checklists.filter((checklist) => checklist?.isCompleted)?.length;
     };
 
     const toggleChecklistCompletion = (taskId, checklistId) => {
         setTasks((currentTasks) =>
-            currentTasks.map((task) => {
-                if (task._id === taskId) {
-                    const updatedChecklists = task.checklists.map((checklist) => {
-                        if (checklist._id === checklistId) {
-                            const newIsCompleted = !checklist.isCompleted;
+            currentTasks?.map((task) => {
+                if (task?._id === taskId) {
+                    const updatedChecklists = task?.checklists?.map((checklist) => {
+                        if (checklist?._id === checklistId) {
+                            const newIsCompleted = !checklist?.isCompleted;
                             setData({
                                 taskId: taskId,
                                 checklistId: checklistId,
@@ -217,8 +217,8 @@ function Board() {
     const collapseAllChecklists = (boardStatus) => {
         setChecklistVisibility((prevState) => {
             const newState = { ...prevState };
-            filterTasksByStatus(boardStatus).forEach((task) => {
-                newState[task._id] = false;
+            filterTasksByStatus(boardStatus)?.forEach((task) => {
+                newState[task?._id] = false;
             });
             return newState;
         });

@@ -71,7 +71,7 @@ function ViewTask() {
                 </div>
                 <h1 className="view-task-title">{task?.title}</h1>
                 <div className="task-checklist">
-                    <h2>Checklist ({task?.checklists?.filter(c => c.isCompleted).length}/{task?.checklists?.length})</h2>
+                    <h2>Checklist ({task?.checklists?.filter(c => c?.isCompleted)?.length}/{task?.checklists?.length})</h2>
                     <div className="all-checklist view-checklist">
                         {task?.checklists?.map((checklist) => {
                             return (
