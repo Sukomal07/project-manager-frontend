@@ -1,36 +1,52 @@
-import '../styles/Layout.css';
+import "../styles/Layout.css";
 
-import { useState } from 'react';
-import { FiLayout, FiSettings } from 'react-icons/fi';
+import { useState } from "react";
+import { FiLayout, FiSettings } from "react-icons/fi";
 import { GoDatabase } from "react-icons/go";
-import { IoLogOutOutline } from 'react-icons/io5';
-import { NavLink } from 'react-router-dom';
+import { IoLogOutOutline } from "react-icons/io5";
+import { NavLink } from "react-router-dom";
 
-import siteLogo from '../assets/sitelogo.png'
-import CreateTask from '../components/CreateTask';
-import DeleteModel from '../components/DeleteModel';
-import LogoutModel from '../components/LogoutModel';
+import siteLogo from "../assets/sitelogo.png";
+import CreateTask from "../components/CreateTask";
+import DeleteModel from "../components/DeleteModel";
+import EditTask from "../components/EditTask";
+import LogoutModel from "../components/LogoutModel";
 
-function Layout({ children, taskId, display, setDeleteModelInfo, setRefresh, setCreateTaskModel, visibility }) {
-    const [logoutDisplay, setLogoutDisplay] = useState("none")
+function Layout({
+    children,
+    taskId,
+    display,
+    setDeleteModelInfo,
+    setRefresh,
+    setCreateTaskModel,
+    visibility,
+    editTaskVisibility,
+    setEditTaskVisibility,
+    selectedTask
+}) {
+    const [logoutDisplay, setLogoutDisplay] = useState("none");
 
     const hideDeleteModel = () => {
-        setDeleteModelInfo(prevInfo => ({
+        setDeleteModelInfo((prevInfo) => ({
             ...prevInfo,
-            display: 'none'
+            display: "none",
         }));
-    }
+    };
 
     const onLogout = () => {
-        setLogoutDisplay("flex")
-    }
+        setLogoutDisplay("flex");
+    };
 
     const cancelLogout = () => {
-        setLogoutDisplay("none")
-    }
+        setLogoutDisplay("none");
+    };
 
     const cancelCreateTask = () => {
-        setCreateTaskModel("none")
+        setCreateTaskModel("none");
+    };
+
+    const cancelEditTask = () => {
+        setEditTaskVisibility("none")
     }
 
     return (
@@ -42,21 +58,43 @@ function Layout({ children, taskId, display, setDeleteModelInfo, setRefresh, set
                 </div>
                 <nav className="sidebar-nav">
                     <ul>
-                        <li><NavLink to="/board" ><FiLayout /> Board</NavLink></li>
-                        <li><NavLink to="/analytics"><GoDatabase /> Analytics</NavLink></li>
-                        <li><NavLink to="/settings" ><FiSettings /> Settings</NavLink></li>
+                        <li>
+                            <NavLink to="/board">
+                                <FiLayout /> Board
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/analytics">
+                                <GoDatabase /> Analytics
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/settings">
+                                <FiSettings /> Settings
+                            </NavLink>
+                        </li>
                     </ul>
                 </nav>
                 <div className="sidebar-footer">
-                    <button onClick={onLogout}><IoLogOutOutline /> Log out</button>
+                    <button onClick={onLogout}>
+                        <IoLogOutOutline /> Log out
+                    </button>
                 </div>
             </aside>
-            <main className="main-content">
-                {children}
-            </main>
-            <DeleteModel display={display} taskId={taskId} onCancel={hideDeleteModel} setRefresh={setRefresh} />
+            <main className="main-content">{children}</main>
+            <DeleteModel
+                display={display}
+                taskId={taskId}
+                onCancel={hideDeleteModel}
+                setRefresh={setRefresh}
+            />
             <LogoutModel logoutDisplay={logoutDisplay} cancelLogout={cancelLogout} />
-            <CreateTask visibility={visibility} cancelCreateTask={cancelCreateTask} setRefresh={setRefresh} />
+            <CreateTask
+                visibility={visibility}
+                cancelCreateTask={cancelCreateTask}
+                setRefresh={setRefresh}
+            />
+            <EditTask editTaskVisibility={editTaskVisibility} cancelEditTask={cancelEditTask} task={selectedTask} setRefresh={setRefresh} />
         </div>
     );
 }

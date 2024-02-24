@@ -1,6 +1,6 @@
 import '../../styles/Settings.css'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CiLock } from "react-icons/ci";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { TiUserOutline } from "react-icons/ti";
@@ -11,8 +11,9 @@ import { getProfile, updateProfile } from '../../redux/slices/AuthSlice';
 
 function Settings() {
     const dispatch = useDispatch()
+    const profileName = useSelector((state) => state.auth?.data?.name);
     const [formData, setFormData] = useState({
-        name: useSelector((state) => state.auth?.data?.name),
+        name: profileName,
         oldPassword: '',
         newPassword: ''
     });
@@ -81,6 +82,9 @@ function Settings() {
         }
     };
 
+    useEffect(() => {
+        dispatch(getProfile());
+    }, [dispatch, profileName]);
 
     return (
         <Layout>
@@ -93,6 +97,7 @@ function Settings() {
                             <input
                                 type="text"
                                 name="name"
+                                id='name'
                                 value={formData.name}
                                 onChange={handleChange}
                                 placeholder="Name"
@@ -107,6 +112,7 @@ function Settings() {
                             <input
                                 type={isOldPasswordVisible ? "text" : "Password"}
                                 name="oldPassword"
+                                id='oldPassword'
                                 value={formData.oldPassword}
                                 onChange={handleChange}
                                 placeholder="Old Password"
@@ -126,6 +132,7 @@ function Settings() {
                             <input
                                 type={isNewPasswordVisible ? "text" : "Password"}
                                 name="newPassword"
+                                id='newPassword'
                                 value={formData.newPassword}
                                 onChange={handleChange}
                                 placeholder="New Password"

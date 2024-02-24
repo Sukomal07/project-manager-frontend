@@ -103,7 +103,7 @@ function CreateTask({ visibility, cancelCreateTask, setRefresh }) {
                     <input
                         type="text"
                         name="title"
-                        id="title"
+                        id="create-task-title"
                         placeholder="Enter Task Title"
                         className="create-task-modal__input"
                         value={title}
@@ -141,6 +141,7 @@ function CreateTask({ visibility, cancelCreateTask, setRefresh }) {
                                 <div className="create-task-modal__checklist-input">
                                     <input
                                         type="checkbox"
+                                        id={`checkbox-${item.id}`}
                                         checked={item.isCompleted}
                                         onChange={() => handleChecklistCheck(item.id)}
                                         className="create-task-modal__checklist-checkbox"
@@ -148,6 +149,8 @@ function CreateTask({ visibility, cancelCreateTask, setRefresh }) {
                                     <input
                                         type="text"
                                         value={item.name}
+                                        name={item.name}
+                                        id={item.id}
                                         onChange={(event) => handleChecklistChange(item.id, event)}
                                         placeholder="Add a task"
                                         className="create-task-modal__checklist-text"
