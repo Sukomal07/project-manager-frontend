@@ -10,12 +10,14 @@ import Analytics from './pages/dashboard/Analytics'
 import Board from './pages/dashboard/Board'
 import Settings from './pages/dashboard/Settings'
 import ViewTask from './pages/dashboard/ViewTask';
+import NotFound from './pages/NotFound';
 
 function App() {
 
   return (
     <>
       <Routes>
+        <Route path='*' element={<NotFound />} />
         <Route element={<UnprotectedRoute />}>
           <Route path='/' element={<Signup />} />
           <Route path='/login' element={<Login />} />

@@ -5,6 +5,55 @@
   font-family: sans-serif;
 }
 
+.notfound {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 27px;
+  color: #000000d4;
+  background-color: #80808040;
+}
+.notfound p {
+  font-weight: 600;
+}
+.notfound-error {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  align-items: center;
+  justify-content: center;
+}
+.error-code {
+  color: #17a2b8;
+  font-size: 10rem;
+}
+.notfound-text {
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  font-size: 5rem;
+  transform: rotate(-14deg);
+  color: #ff0000ad;
+  font-weight: 600;
+}
+.home {
+  text-decoration: none;
+  background-color: #17a2b8;
+  color: white;
+  padding: 13px 26px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out 2ms;
+}
+.home:hover {
+  background-color: white;
+  color: #17a2b8;
+  border: 1px solid #17a2b8;
+}
+
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
