@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
+import toast from 'react-hot-toast'
 import { FaPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useDispatch } from 'react-redux'
@@ -78,28 +79,50 @@ function CreateTask({ visibility, cancelCreateTask, setRefresh }) {
         (item) => item.isCompleted
     ).length;
 
+    const validate = () => {
+        if (!title.trim()) {
+            toast.error("Task title is required")
+            return false
+        }
+        if (!priority) {
+            toast.error("Task priority is required")
+            return false
+        }
+        for (let i = 0; i < checklists.length; i++) {
+            const checklist = checklists[i].name
+
+            if (!checklist.trim()) {
+                toast.error(`Checklist ${i + 1} name is required`)
+                return false
+            }
+        }
+        return true
+    }
+
 
     const handlesave = async () => {
-        const task = {
-            title,
-            priority,
-            checklists,
-            dueDate: dueDate ? formatDate(dueDate) : ""
-        }
-        const response = await dispatch(createTask(task))
-        if (response.payload?.success) {
-            setDueDate("")
-            setPriority("")
-            setTitle("")
-            setChecklists([
-                {
-                    id: 1,
-                    name: "",
-                    isCompleted: false
-                }
-            ])
-            setRefresh(true)
-            cancelCreateTask()
+        if (validate()) {
+            const task = {
+                title,
+                priority,
+                checklists,
+                dueDate: dueDate ? formatDate(dueDate) : ""
+            }
+            const response = await dispatch(createTask(task))
+            if (response.payload?.success) {
+                setDueDate("")
+                setPriority("")
+                setTitle("")
+                setChecklists([
+                    {
+                        id: 1,
+                        name: "",
+                        isCompleted: false
+                    }
+                ])
+                setRefresh(true)
+                cancelCreateTask()
+            }
         }
     }
 
