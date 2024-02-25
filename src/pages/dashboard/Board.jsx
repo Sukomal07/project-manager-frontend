@@ -225,7 +225,8 @@ function Board() {
     };
 
     const handleShareClick = (taskId) => {
-        const taskLink = `http://localhost:5173/task/${taskId}`;
+        const url = import.meta.env.VITE_FRONTEND_URL
+        const taskLink = `${url}/task/${taskId}`;
         navigator.clipboard.writeText(taskLink);
         toast.success("Link copied");
     };
