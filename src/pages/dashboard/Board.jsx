@@ -386,7 +386,7 @@ function Board() {
                                                                     )
                                                                 }
                                                             />
-                                                            <span title={checklist?.name} className="checklist-name">{checklist?.name}</span>
+                                                            <span className="checklist-name">{checklist?.name}</span>
                                                         </div>
                                                     );
                                                 })}

@@ -12,13 +12,16 @@ function ViewTask() {
     const { taskId } = useParams()
 
     const [task, setTask] = useState({})
+    const [loading, setIsLoading] = useState(false)
 
     useEffect(() => {
         const getData = async () => {
+            setIsLoading(true)
             const res = await dispatch(getTask(taskId))
             if (res.payload?.success) {
                 setTask(res.payload?.data)
             }
+            setIsLoading(false)
         }
         getData()
     }, [])
@@ -57,6 +60,14 @@ function ViewTask() {
 
         return `${month} ${day}${getDaySuffix(day)}`;
     };
+
+    if (loading) {
+        return (
+            <div className='loader-container'>
+                <div className='loader'></div>
+            </div>
+        )
+    }
 
     return (
         <div className="view-task-container">

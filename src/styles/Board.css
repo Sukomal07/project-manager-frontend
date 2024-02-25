@@ -63,11 +63,6 @@
   text-overflow: ellipsis;
   cursor: default;
 }
-.checklist-name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 .add-task {
   display: flex;
@@ -186,6 +181,7 @@
   align-items: center;
   gap: 10px;
   border-radius: 7px;
+  word-break: break-all;
 }
 .checklist input {
   height: 16px;
