@@ -88,6 +88,16 @@ function CreateTask({ visibility, cancelCreateTask, setRefresh }) {
         }
         const response = await dispatch(createTask(task))
         if (response.payload?.success) {
+            setDueDate("")
+            setPriority("")
+            setTitle("")
+            setChecklists([
+                {
+                    id: 1,
+                    name: "",
+                    isCompleted: false
+                }
+            ])
             setRefresh(true)
             cancelCreateTask()
         }
