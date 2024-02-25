@@ -63,6 +63,11 @@
   text-overflow: ellipsis;
   cursor: default;
 }
+.checklist-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .add-task {
   display: flex;
