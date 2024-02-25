@@ -41,7 +41,11 @@ function Analytics() {
             <div className="analytics-container">
                 <h2>Analytics</h2>
                 {
-                    isLoading ? (<div className="loader"></div>) : (
+                    isLoading ? (
+                        <div className="loader-container">
+                            <div className="loader"></div>
+                        </div>
+                    ) : (
                         <div className="analytics-sections">
                             <div className="task-status-section">
                                 <ul>
