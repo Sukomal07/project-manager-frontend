@@ -46,10 +46,22 @@ function Board() {
     const [createTaskModel, setCreateTaskModel] = useState("none");
     const [editTaskVisibility, setEditTaskVisibility] = useState("none");
     const [selectedTask, setSelectedTask] = useState(null);
+    const [loading, setIsLoading] = useState(false)
+
+    const toggleThreeDot = (taskId) => () => {
+        setThreeDot((prevState) => ({
+            ...prevState,
+            [taskId]: !prevState[taskId],
+        }));
+    };
 
     const handleEditClick = (task) => {
         setSelectedTask(task);
         setEditTaskVisibility("flex");
+        setThreeDot((prevState) => ({
+            ...prevState,
+            [task?._id]: !prevState[task?._id],
+        }));
     };
 
     const handleClickPlus = () => {
@@ -61,6 +73,10 @@ function Board() {
             display: "flex",
             taskId: taskId,
         });
+        setThreeDot((prevState) => ({
+            ...prevState,
+            [taskId]: !prevState[taskId],
+        }));
     };
 
     const updateStatus = (taskId, fromStatus, toStatus) => {
@@ -99,12 +115,6 @@ function Board() {
         setShowDropdown(false);
     };
 
-    const toggleThreeDot = (taskId) => () => {
-        setThreeDot((prevState) => ({
-            ...prevState,
-            [taskId]: !prevState[taskId],
-        }));
-    };
 
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
@@ -229,12 +239,18 @@ function Board() {
         const taskLink = `${url}/task/${taskId}`;
         navigator.clipboard.writeText(taskLink);
         toast.success("Link copied");
+        setThreeDot((prevState) => ({
+            ...prevState,
+            [taskId]: !prevState[taskId],
+        }));
     };
 
     useEffect(() => {
         const fetchTasks = async () => {
+            setIsLoading(true)
             const response = await dispatch(getTimeFrameTask(timeFrame));
             setTasks(response.payload?.data);
+            setIsLoading(false)
         };
         fetchTasks();
         if (refresh) {
@@ -326,99 +342,115 @@ function Board() {
                                     />
                                 )}
                             </div>
-                            <div className="all-task">
-                                {filterTasksByStatus(status).map((task) => (
-                                    <div key={task?._id} className="task">
-                                        <header className="task-priority">
-                                            <div className="priority">
-                                                <span className={task?.priority}></span>
-                                                <span>{convertPriority(task?.priority)}</span>
-                                            </div>
-                                            <div className="dropdown-container">
-                                                <span onClick={toggleThreeDot(task?._id)}>
-                                                    <VscEllipsis />
-                                                </span>
-                                                {threeDot[task?._id] && (
-                                                    <div className="dropdown">
-                                                        <span onClick={() => handleEditClick(task)}>Edit</span>
-                                                        <span onClick={() => handleShareClick(task?._id)}>
-                                                            Share
-                                                        </span>
-                                                        <span onClick={() => handleDeleteClick(task?._id)}>
-                                                            Delete
-                                                        </span>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </header>
-                                        <h1 className="task-title" title={task?.title}>
-                                            {task?.title}
-                                        </h1>
-                                        <div className="checklist-header">
-                                            <span>
-                                                Checklist ({countCompletedChecklists(task?.checklists)}/
-                                                {task?.checklists?.length})
-                                            </span>
-                                            <div>
-                                                {checklistVisibility[task?._id] ? (
-                                                    <VscChevronUp
-                                                        onClick={() => toggleChecklistVisibility(task?._id)}
-                                                    />
-                                                ) : (
-                                                    <VscChevronDown
-                                                        onClick={() => toggleChecklistVisibility(task?._id)}
-                                                    />
-                                                )}
-                                            </div>
-                                        </div>
-                                        {checklistVisibility[task?._id] && (
-                                            <div className="all-checklist">
-                                                {task?.checklists?.map((checklist) => {
-                                                    return (
-                                                        <div className="checklist" key={checklist?._id}>
-                                                            <input
-                                                                type="checkbox"
-                                                                checked={checklist?.isCompleted}
-                                                                onChange={() =>
-                                                                    toggleChecklistCompletion(
-                                                                        task?._id,
-                                                                        checklist?._id
-                                                                    )
-                                                                }
-                                                            />
-                                                            <span className="checklist-name">{checklist?.name}</span>
-                                                        </div>
-                                                    );
-                                                })}
-                                            </div>
-                                        )}
-                                        <div className="task-footer">
-                                            <span
-                                                style={
-                                                    task?.dueDate
-                                                        ? getDueDateStyles(task?.status, task?.dueDate)
-                                                        : { backgroundColor: "transparent" }
-                                                }
-                                            >
-                                                {task?.dueDate ? formattedDate(task?.dueDate) : ""}
-                                            </span>
-                                            <div className="other-boards">
-                                                {getOtherBoards(status).map((otherStatus) => (
-                                                    <span
-                                                        key={otherStatus}
-                                                        onClick={() =>
-                                                            updateStatus(task?._id, status, otherStatus)
-                                                        }
-                                                    >
-                                                        {otherStatus.charAt(0).toUpperCase() +
-                                                            otherStatus.slice(1)}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
+                            {
+                                loading ? (
+                                    <div className="loader-container">
+                                        <div className="loader"></div>
                                     </div>
-                                ))}
-                            </div>
+                                ) : (
+                                    <div className="all-task">
+                                        {
+                                            filterTasksByStatus(status).length === 0 ? (
+                                                <p className="no-task-message">
+                                                    No tasks found {convertTimeFrame(timeFrame)}
+                                                </p>
+                                            ) : (
+                                                filterTasksByStatus(status).map((task) => (
+                                                    <div key={task?._id} className="task">
+                                                        <header className="task-priority">
+                                                            <div className="priority">
+                                                                <span className={task?.priority}></span>
+                                                                <span>{convertPriority(task?.priority)}</span>
+                                                            </div>
+                                                            <div className="dropdown-container">
+                                                                <span onClick={toggleThreeDot(task?._id)}>
+                                                                    <VscEllipsis />
+                                                                </span>
+                                                                {threeDot[task?._id] && (
+                                                                    <div className="dropdown">
+                                                                        <span onClick={() => handleEditClick(task)}>Edit</span>
+                                                                        <span onClick={() => handleShareClick(task?._id)}>
+                                                                            Share
+                                                                        </span>
+                                                                        <span onClick={() => handleDeleteClick(task?._id)}>
+                                                                            Delete
+                                                                        </span>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        </header>
+                                                        <h1 className="task-title" title={task?.title}>
+                                                            {task?.title}
+                                                        </h1>
+                                                        <div className="checklist-header">
+                                                            <span>
+                                                                Checklist ({countCompletedChecklists(task?.checklists)}/
+                                                                {task?.checklists?.length})
+                                                            </span>
+                                                            <div>
+                                                                {checklistVisibility[task?._id] ? (
+                                                                    <VscChevronUp
+                                                                        onClick={() => toggleChecklistVisibility(task?._id)}
+                                                                    />
+                                                                ) : (
+                                                                    <VscChevronDown
+                                                                        onClick={() => toggleChecklistVisibility(task?._id)}
+                                                                    />
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                        {checklistVisibility[task?._id] && (
+                                                            <div className="all-checklist">
+                                                                {task?.checklists?.map((checklist) => {
+                                                                    return (
+                                                                        <div className="checklist" key={checklist?._id}>
+                                                                            <input
+                                                                                type="checkbox"
+                                                                                checked={checklist?.isCompleted}
+                                                                                onChange={() =>
+                                                                                    toggleChecklistCompletion(
+                                                                                        task?._id,
+                                                                                        checklist?._id
+                                                                                    )
+                                                                                }
+                                                                            />
+                                                                            <span className="checklist-name">{checklist?.name}</span>
+                                                                        </div>
+                                                                    );
+                                                                })}
+                                                            </div>
+                                                        )}
+                                                        <div className="task-footer">
+                                                            <span
+                                                                style={
+                                                                    task?.dueDate
+                                                                        ? getDueDateStyles(task?.status, task?.dueDate)
+                                                                        : { backgroundColor: "transparent" }
+                                                                }
+                                                            >
+                                                                {task?.dueDate ? formattedDate(task?.dueDate) : ""}
+                                                            </span>
+                                                            <div className="other-boards">
+                                                                {getOtherBoards(status).map((otherStatus) => (
+                                                                    <span
+                                                                        key={otherStatus}
+                                                                        onClick={() =>
+                                                                            updateStatus(task?._id, status, otherStatus)
+                                                                        }
+                                                                    >
+                                                                        {otherStatus.charAt(0).toUpperCase() +
+                                                                            otherStatus.slice(1)}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            )
+                                        }
+                                    </div>
+                                )
+                            }
                         </div>
                     ))}
                 </div>

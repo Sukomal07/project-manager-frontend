@@ -97,6 +97,11 @@
   background-color: #f6f6f6;
 }
 
+.no-task-message {
+  color: red;
+  font-size: 20px;
+}
+
 .all-task {
   display: flex;
   flex-direction: column;
