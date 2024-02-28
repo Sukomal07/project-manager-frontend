@@ -352,7 +352,7 @@ function Board() {
                                         {
                                             filterTasksByStatus(status).length === 0 ? (
                                                 <p className="no-task-message">
-                                                    No tasks found {convertTimeFrame(timeFrame)}
+                                                    No {status} task found {convertTimeFrame(timeFrame)}
                                                 </p>
                                             ) : (
                                                 filterTasksByStatus(status).map((task) => (
